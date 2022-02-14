@@ -1,0 +1,177 @@
+syntax = "proto3";
+import "Protos/model.proto";
+option csharp_namespace = "MineralInventory";
+
+package client;
+
+service Account {
+    rpc SignIn (UserInfo) returns (UserReply);
+    rpc ChangePassword(UserInfo) returns (Response);
+    rpc InsertUser(UserInfo) returns (Response);
+    rpc UpdateUser(UserInfo) returns (Response);
+    rpc DeleteUser(UserInfo) returns (Response);
+}
+
+service Administrator {
+    rpc GetListMasterData(MasterRequest) returns (MasterDataResponse);
+    rpc GetListEquipment(MasterRequest) returns (EquipmentResponse);
+    rpc GetListPackingUnit(MasterRequest) returns (PackingUnitResponse);
+    rpc GetListPartner(MasterRequest) returns (PartnerResponse);
+    rpc GetListProduct(MasterRequest) returns (ProductResponse);
+    rpc GetListReason(MasterRequest) returns (ReasonResponse);
+    rpc GetListTypeBill(MasterRequest) returns (TypeBillResponse);
+    rpc GetListTypePacket(MasterRequest) returns (TypePacketResponse);
+    rpc GetListTypeProduct(MasterRequest) returns (TypeProductResponse);
+    rpc GetListWareHouse(MasterRequest) returns (WareHouseResponse);
+    rpc GetListWork(MasterRequest) returns (WorkResponse);
+    rpc GetListTypeEquipment(MasterRequest) returns (MasterDataResponse);
+    rpc GetListTypePartner(MasterRequest) returns (MasterDataResponse);
+    rpc GetListUsers(MasterRequest) returns (UserResponse);
+    rpc GetListDevices(MasterRequest) returns (DeviceResponse);
+    rpc GetListPosition(MasterRequest) returns (MasterDataResponse);
+    rpc GetListDepartment(MasterRequest) returns (DepartmentResponse);
+    rpc GetListRecordObject(MasterRequest) returns (RecordObjectResponse);
+
+
+
+    rpc InsertEquipment(EquipmentInfo) returns (Response);
+    rpc UpdateEquipment(EquipmentInfo) returns (Response);
+    rpc DeleteEquipment(EquipmentInfo) returns (Response);
+
+    rpc InsertPackingUnit(PackingUnitInfo) returns (Response);
+    rpc UpdatePackingUnit(PackingUnitInfo) returns (Response);
+    rpc DeletePackingUnit(PackingUnitInfo) returns (Response);
+
+    rpc InsertPartner(PartnerInfo) returns (Response);
+    rpc UpdatePartner(PartnerInfo) returns (Response);
+    rpc DeletePartner(PartnerInfo) returns (Response);
+
+    rpc InsertProduct(ProductInfo) returns (Response);
+    rpc UpdateProduct(ProductInfo) returns (Response);
+    rpc DeleteProduct(ProductInfo) returns (Response);
+
+    rpc InsertReason(ReasonInfo) returns (Response);
+    rpc UpdateReason(ReasonInfo) returns (Response);
+    rpc DeleteReason(ReasonInfo) returns (Response);
+
+    rpc InsertTypeBill(TypeBillInfo) returns (Response);
+    rpc UpdateTypeBill(TypeBillInfo) returns (Response);
+    rpc DeleteTypeBill(TypeBillInfo) returns (Response);
+
+    rpc InsertTypePacket(TypePacketInfo) returns (Response);
+    rpc UpdateTypePacket(TypePacketInfo) returns (Response);
+    rpc DeleteTypePacket(TypePacketInfo) returns (Response);
+
+    rpc InsertTypeProduct(TypeProductInfo) returns (Response);
+    rpc DeleteTypeProduct(TypeProductInfo) returns (Response);
+
+rpc InsertWareHouse(WareHouseInfo) returns (Response);
+    rpc UpdateWareHouse(WareHouseInfo) returns (Response);
+    rpc DeleteWareHouse(WareHouseInfo) returns (Response);
+
+    rpc InsertWork(WorkInfo) returns (Response);
+    rpc UpdateWork(WorkInfo) returns (Response);
+    rpc DeleteWork(WorkInfo) returns (Response);
+
+   
+    //rpc Login(UserInfo) returns (UserReply);
+
+
+    rpc InsertDevice(DeviceInfo) returns (Response);
+    rpc UpdateDevice(DeviceInfo) returns (Response);
+    rpc DeleteDevice(DeviceInfo) returns (Response);
+
+    rpc InsertRecordObject(RecordObjectInfo) returns (Response);
+    rpc DeleteRecordObject(RecordObjectInfo) returns (Response);
+    rpc UpdateRecordObject(RecordObjectInfo) returns (Response);
+
+    rpc InsertTransportationUnit(TransportationUnitInfo) returns (Response);
+    rpc UpdateTransportationUnit(TransportationUnitInfo) returns (Response);
+    rpc DeleteTransportationUnit(TransportationUnitInfo) returns (Response);
+    rpc GetListTransportationUnit(MasterRequest) returns (TransportationUnitResponse);
+
+
+    rpc InsertMaster (MasterDataInfo) returns (Response);
+    rpc UpdateMaster(MasterDataInfo) returns (Response);
+    rpc SetDeletedMaster (MasterDataInfo) returns (Response);
+    rpc GetListMaster (MasterDataInfo) returns (MasterDataResponse);
+
+}
+service WareHouse {
+
+    rpc GetListShiftByDate(MasterRequest) returns (ShiftResponse);           // on day
+    rpc GetListShiftDetail(MasterRequest) returns (ShiftDetailResponse);     // from date ->  to date
+
+    rpc GetListAllParcel(MasterRequest) returns (ParcelResponse);               // get all
+    rpc GetListParcelDetail(MasterRequest) returns (ParcelDetailResponse);   // from date -> to date
+    rpc GetListParcelDetailByCode(MasterRequest) returns (ParcelDetailResponse);
+    rpc GetListParcel(MasterRequest) returns (ParcelResponse); // from date -> to date
+
+    rpc NewInsertShift(InsertShiftRequest) returns (Response);
+    rpc NewUpdateShift(InsertShiftRequest) returns (Response);
+    rpc DeleteShift(ShiftInfo) returns (Response);
+
+    rpc InsertParcel(InsertParcelRequest) returns (Response);
+    rpc UpdateParcel(InsertParcelRequest) returns (Response);
+    rpc DeleteParcel(ParcelInfo) returns (Response);
+
+    
+    rpc InsertConfirmProduct(ConfirmProduction1000Info) returns (Response);  // insert return false if exist 
+    rpc UpdateConfirmProduct(ConfirmProduction1000Info) returns (Response);  //update confirm
+    rpc GetConfirmProduct(MasterRequest) returns (ConfirmProductionResponse); //get from date -> to date
+    rpc GetConfirmProductDisplayByShift(MasterRequest) returns (ConfirmProductionResponse); // if not exist return 0 for machine
+    rpc GetConfirmProductByShift(MasterRequest) returns (ConfirmProductionResponse);  // return only exist data
+}
+
+service Card
+{
+
+    rpc GetListCard(MasterRequest) returns (CardDetailResponse); // from date -> to date
+    rpc GetListCar50kg(MasterRequest) returns (CardDetailResponse); // from date -> to date
+    rpc GetListCard1000kg(MasterRequest) returns (CardDetailResponse);
+
+    rpc GetListCard50kgByShift(MasterRequest) returns (CardDetailResponse); // get date and name
+
+
+
+    rpc InsertCard(InsertCardRequest) returns (Response);
+    rpc InsertCard50kg(InsertCardRequest) returns (Response);  // insert
+    rpc UpdateCard50kg(InsertCardRequest) returns (Response);  // update multy card 50kg in shift
+    rpc UpdateOneCard50kg(CardDetailInfo) returns (Response);  // update one card (created person is update person)
+    //rpc SetChangeableCard(CardDetailInfo) returns (Response);
+    rpc DeleteCard(CardDetailInfo) returns (Response);
+
+    rpc InsertOrder(OrderInfo) returns (OrderResponse);
+    rpc UpdateOrder(OrderInfo) returns (Response);
+    rpc GetOrderByCode(OrderInfo) returns (OrderResponse);
+
+
+
+
+}
+
+service Report
+{
+    rpc GetReportTransport (MasterRequest) returns (TransportResponse);  // from date -> to date
+    rpc GetReportImportExport(MasterRequest) returns (CardDetailResponse); // from date -> to date
+    rpc GetReportInventory(MasterRequest) returns (ReportInventoryResponse); // from date -> to date
+    rpc GetReportOrder(MasterRequest) returns (OrderReply);// from date -> to date
+    rpc GetReportError(MasterRequest) returns (CardDetailResponse);// from date -> to date
+    rpc GetReportQRCode(MasterRequest) returns (QRCodeResponse);// from date -> to date
+    rpc GetQRCodeByTransportIn(MasterRequest) returns (QRCodeResponse);
+    rpc GetQRCodeByTransportOut(MasterRequest) returns (QRCodeResponse);
+    rpc GetQRCodeByOrder(MasterRequest) returns (QRCodeResponse);
+}
+
+service RecordConfirm 
+{
+    rpc GetListMaster (MasterDataInfo) returns (MasterDataResponse);
+    rpc GetListProduct(MasterRequest) returns (ProductResponse);          //get all
+    rpc GetListTypeProduct(MasterRequest) returns (TypeProductResponse);   //get all
+    rpc GetListTypePacket(MasterRequest) returns (TypePacketResponse);     //get all
+    rpc GetListRecordObject(MasterRequest) returns (RecordObjectResponse); // get all
+    rpc GetListCard(MasterRequest) returns (CardDetailResponse); // date and namehsift
+    rpc GetListError(MasterRequest) returns (CardDetailResponse);// date and namehsift
+    rpc GetListTransport (MasterRequest) returns (TransportResponse); //date and namehsift
+}
+
